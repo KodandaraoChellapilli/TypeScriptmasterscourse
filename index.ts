@@ -206,7 +206,165 @@
 // let firstName: any = "Mark"; // cast string as any
 
 // There are two ways
-// angle brackets
-let firstName = <any>"Mark"; // cast string as any
+// // angle brackets
+// let firstName = <any>"Mark"; // cast string as any
+// firstName = 123;
 
-let lastname = "smith" as any;
+// let lastname = "smith" as any;
+// lastname = { age: 30 };
+
+// let user = {
+//   name: "Mark",
+//   email: "mark@gmail.com",
+// };
+
+// type User = {
+//   name: String;
+//   email: String;
+// };
+
+// function fetchUser() {
+//   return user as User;
+// }
+
+// const fetchedData = fetchUser();
+// console.log(fetchedData.name);
+// // console.log(fetchedData.email);
+
+// let person = {
+//   name: "John",
+//   age: 32,
+// };
+
+// person : {
+//   name: string;
+//   age: number;
+// }
+
+// // Annontating with the object type
+// let car: object = {
+//   brand: "Toyota",
+//   color: "black",
+// };
+
+// car = [1, 2, 3]; // IGNORE
+// car = function() {};
+
+// Using {} (object literal syntax)
+
+// let newCar: {} = {
+//   brand: "Toyota",
+//   color: "black",
+// }
+
+// newCar = [1, 2, 3]; // IGNORE
+// newCar = function() {};
+
+// let newCar: {
+//   brand: string;
+//   color: string;
+// } = {
+//   brand: "Toyota",
+//   color: "black",
+// };
+
+// type Post = {
+//   title: string;
+//   content: string;
+//   date: Date;
+// author = {
+//   name : string;
+//   age : number;
+//   email : string;
+// };
+
+// type Author = {
+//   name : string;
+//   age : number;
+//   email : string;
+// };
+
+// let post: Post = {
+//   title: "This is a blog post",
+//   content: "This is the content of the blog post",
+//   date: new Date(),
+// };
+
+// let post2: Post = {
+//   title: "This is a blog post2",
+//   content: "This is the content of the blog post2",
+//   date: new Date(),
+// };
+// A nested Object means : An object inside another object
+// but now we also want to an author inside the post object
+// and this author itself has its own properties
+// name : string
+// age : number
+// email : string
+
+// post = {
+//   title: "",
+//   content: "",
+//   date: new Date(),
+//   author: {
+//     name : "",
+//     age : ...,
+//     email : "",
+//   }
+// }
+
+type Author = {
+  name: string;
+  age: number;
+  email: string;
+};
+
+type Post = {
+  title: string;
+  content: string;
+  date: Date;
+  author: Author;
+  awards: {
+    [key: string]: {
+      name: string;
+      date: Date;
+    };
+  };
+};
+
+let post: Post = {
+  title: "This is a blog post",
+  content: "This is the content of the blog post",
+  date: new Date(),
+  author: {
+    name: "Vinodh",
+    age: 26,
+    email: "vin@gmail.com",
+  },
+};
+
+let post2: Post = {
+  title: "This is a blog post2",
+  content: "This is the content of the blog post2",
+  date: new Date(),
+  author: {
+    name: "Mark",
+    age: 30,
+    email: "ggmail.com",
+  },
+};
+
+// index signatures
+
+// awards: {
+//   web: {
+//     name: "web Awards",
+//     date: new Date()
+//   },
+
+//   web3: {
+//     name: "web3",
+//     date: new Date()
+//   }
+
+// }
