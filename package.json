@@ -1,0 +1,16 @@
+{
+  "name": "typescript-play",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "tsc-w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "types": "./index.d.ts",
+  "description": ""
+}
