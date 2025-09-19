@@ -317,6 +317,16 @@ type Author = {
   name: string;
   age: number;
   email: string;
+  readonly type: "human" | "ai";
+};
+
+type AwardDetails = {
+  name: string;
+  date: Date;
+};
+
+type Awards = {
+  [key: string]: AwardDetails;
 };
 
 type Post = {
@@ -324,12 +334,8 @@ type Post = {
   content: string;
   date: Date;
   author: Author;
-  awards: {
-    [key: string]: {
-      name: string;
-      date: Date;
-    };
-  };
+  awards: Awards;
+  category?: string; // optional property
 };
 
 let post: Post = {
@@ -340,31 +346,111 @@ let post: Post = {
     name: "Vinodh",
     age: 26,
     email: "vin@gmail.com",
+    type: "human",
   },
+  awards: {
+    web: {
+      name: "web Awards",
+      date: new Date(),
+    },
+
+    web3: {
+      name: "web3",
+      date: new Date(),
+    },
+  },
+
+  category: "Tech",
 };
 
-let post2: Post = {
-  title: "This is a blog post2",
-  content: "This is the content of the blog post2",
-  date: new Date(),
-  author: {
-    name: "Mark",
-    age: 30,
-    email: "ggmail.com",
-  },
+type Dog = {
+  name: string;
+  barks: boolean;
+  wags: boolean;
 };
 
-// index signatures
+type Cat = {
+  name: string;
+  purrs: boolean;
+};
 
-// awards: {
-//   web: {
-//     name: "web Awards",
-//     date: new Date()
-//   },
+type DogAndCatUnion = Dog | Cat;
 
-//   web3: {
-//     name: "web3",
-//     date: new Date()
-//   }
+let dog: DogAndCatUnion = {
+  name: "Buddy",
+  barks: true,
+  wags: true,
+};
 
-// }
+let cat: DogAndCatUnion = {
+  name: "Whiskers",
+  purrs: true,
+};
+
+let hybridAnimal: DogAndCatUnion = {
+  name: "Hybrid",
+  barks: true,
+  purrs: true,
+  wags: false,
+};
+
+// let partialDog: DogAndCatUnion = {
+//   name: "PartialDog",
+//   barks: true,
+// };
+
+type NetworkLoadingState = {
+  state1: "loading";
+};
+
+type NetworkFailedState = {
+  state1: "failed";
+  code: number;
+};
+
+type NetworkSuccessState = {
+  state1: "success";
+
+  response: {
+    title: string;
+    duration: number;
+    summary: string;
+  };
+};
+
+type NetworkState =
+  | NetworkLoadingState
+  | NetworkFailedState
+  | NetworkSuccessState;
+
+function logger(state: NetworkState) {
+  switch (state.state1) {
+    case "loading":
+      return "Downloading...";
+    case "failed":
+      return `Error ${state.code} downloading`;
+    case "success":
+      return `Downloaded ${state.response.title} - ${state.response.summary}`;
+  }
+}
+
+type Cat1 = {
+  name: string;
+  color: string;
+  purrs: boolean;
+};
+
+type Dog1 = {
+  name: string;
+  color: string;
+  barks: boolean;
+};
+
+type HybridAnimal1 = Cat1 & Dog1;
+
+const hybridAnimal1: HybridAnimal1 = {
+  name: "Hybrid",
+  color: "Brown",
+  barks: true,
+  purrs: true,
+};
