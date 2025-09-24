@@ -7,6 +7,8 @@
 // // let pi: number = 3.14;
 // // console.log(pi);
 
+import yup = require("yup");
+
 // // let temp: number = -7;
 // // console.log(temp);
 // // let isRaining: boolean = false;
@@ -399,58 +401,281 @@ let hybridAnimal: DogAndCatUnion = {
 //   barks: true,
 // };
 
-type NetworkLoadingState = {
-  state1: "loading";
+// type NetworkLoadingState = {
+//   state1: "loading";
+// };
+
+// type NetworkFailedState = {
+//   state1: "failed";
+//   code: number;
+// };
+
+// type NetworkSuccessState = {
+//   state1: "success";
+
+//   response: {
+//     title: string;
+//     duration: number;
+//     summary: string;
+//   };
+// };
+
+// type NetworkState =
+//   | NetworkLoadingState
+//   | NetworkFailedState
+//   | NetworkSuccessState;
+
+// function logger(state: NetworkState) {
+//   switch (state.state1) {
+//     case "loading":
+//       return "Downloading...";
+//     case "failed":
+//       return `Error ${state.code} downloading`;
+//     case "success":
+//       return `Downloaded ${state.response.title} - ${state.response.summary}`;
+//   }
+// }
+
+// type Cat1 = {
+//   name: string;
+//   color: string;
+//   purrs: boolean;
+// };
+
+// type Dog1 = {
+//   name: string;
+//   color: string;
+//   barks: boolean;
+// };
+
+// type HybridAnimal1 = Cat1 & Dog1;
+
+// const hybridAnimal1: HybridAnimal1 = {
+//   name: "Hybrid",
+//   color: "Brown",
+//   barks: true,
+//   purrs: true,
+// };
+
+let a: number[] = [1, 2, 3];
+
+// Generic Syntax of Declaring Array of Strings
+
+let b: string[] = ["a", "b", "c"];
+
+// Array containing multiple types
+let c: (string | number)[] = [1, "a", 2, "b", 3, "c"];
+
+c.push(4);
+c.push("d");
+
+// Generic Syntax of Declaring Array of Strings
+
+// Catere type
+
+type Caterer = {
+  name: string;
+  address: string;
+  phone: number;
 };
 
-type NetworkFailedState = {
-  state1: "failed";
-  code: number;
+type Seats = {
+  [keyof: string]: string;
 };
 
-type NetworkSuccessState = {
-  state1: "success";
-
-  response: {
-    title: string;
-    duration: number;
-    summary: string;
-  };
+type Airplane = {
+  model: string;
+  flightNumber: string;
+  timeOfDeparture: Date;
+  timeOfArrival: Date;
+  caterer: Caterer;
+  seats: Seats;
 };
 
-type NetworkState =
-  | NetworkLoadingState
-  | NetworkFailedState
-  | NetworkSuccessState;
+type Airplanes = Airplane[];
 
-function logger(state: NetworkState) {
-  switch (state.state1) {
-    case "loading":
-      return "Downloading...";
-    case "failed":
-      return `Error ${state.code} downloading`;
-    case "success":
-      return `Downloaded ${state.response.title} - ${state.response.summary}`;
-  }
+let airplanes: Airplanes = [
+  {
+    model: "Airbus A380",
+    flightNumber: "AI202",
+    timeOfDeparture: new Date("2023-10-01T10:00:00Z"),
+    timeOfArrival: new Date("2023-10-01T14:00:00Z"),
+    caterer: {
+      name: "SkyCaterers",
+      address: "123 Aviation St, Cityville",
+      phone: 1234567890,
+    },
+    seats: {
+      "1A": "John Doe",
+      "1B": "Jane Smith",
+    },
+  },
+  {
+    model: "Boeing 777",
+    flightNumber: "BA303",
+    timeOfDeparture: new Date("2023-10-02T15:00:00Z"),
+    timeOfArrival: new Date("2023-10-02T19:00:00Z"),
+    caterer: {
+      name: "FlyHigh Catering",
+      address: "456 Airport Rd, Townsville",
+      phone: 9876543210,
+    },
+    seats: {
+      "2A": "Alice Johnson",
+      "2B": "Bob Brown",
+    },
+  },
+];
+
+// Tuples: Arrays with fixed length and fixed order
+// Each position has a specific type
+// you cannot add extra values unless the type allows it
+
+let person: [string, string, number] = ["John", "Doe", 30];
+person = ["Jane", "Smith", 25]; // valid
+
+let user: [string, string, number, string?];
+
+user = ["Alice", "Johnson", 28]; // valid
+user = ["Bob", "Brown", 35, "Extra"]; // valid
+user = ["Charlie", "Davis", 56]; // valid
+
+// Tuples with Rest Parameters
+
+type listOfStudents = [number, boolean, ...string[]];
+
+const passingStudents: listOfStudents = [2, false, "Alice", "Bob"];
+
+const failingStudents: listOfStudents = [1, false, "Charlie"];
+
+// Tuples with Rest Anywhere
+
+// You can also place the rest operator at the beginning or middle
+type listOfStudents1 = [...string[], number, boolean];
+
+const passingStudents1: listOfStudents1 = ["Alice", "gg", "Bob", 2, false];
+
+const failingStudents1: listOfStudents1 = ["Charlie", 1, false];
+
+type BooleanStringNumber = [...boolean[], string, number];
+
+const example1: BooleanStringNumber = [true, false, "Test", 42];
+
+const example2: BooleanStringNumber = [false, "Example", 7];
+
+// Readonly Arrays
+
+let number: readonly number[] = [1, 2, 3, 4, 5];
+
+// Readonly Tuples
+// A tuple can be read only also
+type ReadOnlyTuple = readonly [string, string, number];
+
+const person1: ReadOnlyTuple = ["John", "Doe", 30];
+
+// tuples are immutable
+
+// array
+
+type a = Readonly<(string | number)[]>;
+type b = ReadonlyArray<string | number>;
+
+//tuple
+type c = Readonly<[string, number, number]>;
+
+// In javascript we often write constants like this
+
+const STATUS_LOADING = "loading";
+const STATUS_STOPPED = "stopped";
+
+enum Direction {
+  Up = 1,
+  Down = 2,
+  Left = 3,
+  Right = 4,
+}
+// console.log(Direction);
+
+// console.log(Direction.Down);
+
+// string Enums
+enum Roles {
+  admin = "admin",
+  author = "author",
+  editor = "editor",
 }
 
-type Cat1 = {
+type Person = {
   name: string;
-  color: string;
-  purrs: boolean;
+  email: string;
+  password: string;
+  role: Roles;
 };
 
-type Dog1 = {
-  name: string;
-  color: string;
-  barks: boolean;
+const person3: Person = {
+  name: "Vinodh",
+  email: "vinodh@gmail.com",
+  password: "password",
+  role: Roles.admin,
 };
 
-type HybridAnimal1 = Cat1 & Dog1;
+const enum EDirection {
+  Up,
+  Down,
+  Left,
+  Right,
+}
 
-const hybridAnimal1: HybridAnimal1 = {
-  name: "Hybrid",
-  color: "Brown",
-  barks: true,
-  purrs: true,
+let eDirection = EDirection.Up;
+// console.log(eDirection); // 0
+
+// Object with as const
+
+const ODirection = {
+  Up: 0,
+  Down: 1,
+  Left: 2,
+  Right: 3,
+} as const;
+
+enum AccessPermissions {
+  None = 0,
+  Read = 1,
+  Write = 2,
+  ReadWrite = Read + Write,
+  Delete = 4,
+  All = ReadWrite | Delete,
+}
+
+// console.log(AccessPermissions.ReadWrite); // 3
+// console.log(AccessPermissions.All); // 7
+
+enum Shapekind {
+  Circle = "circle",
+  Square = "square",
+}
+
+// console.log(Shapekind.Circle); // "circle"
+// console.log(Shapekind.Square); // "square"
+
+type Circle = {
+  kind: Shapekind.Circle;
+  radius: number;
 };
+
+type Square = {
+  kind: Shapekind.Square;
+  sideLength: number;
+};
+
+let c1: Circle = {
+  kind: Shapekind.Circle,
+  radius: 10,
+};
+
+function printShape(shape: Shapekind) {
+  console.log(shape);
+}
+
+printShape(Shapekind.Circle);
+printShape(Shapekind.Square);
