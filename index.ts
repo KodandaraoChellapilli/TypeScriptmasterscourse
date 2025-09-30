@@ -1,75 +1,127 @@
-// type Numbers = {
-//   a: number;
-//   b: number;
-//   c: number;
+// // type Numbers = {
+// //   a: number;
+// //   b: number;
+// //   c: number;
+// // };
+
+// // let numbers: Numbers = { a: 2, b: 3, c: 9 };
+// // // function sum(numbers: Numbers) {
+// // //   return numbers.a + numbers.b + numbers.c;
+// // // }
+// // // console.log(sum(numbers));
+
+// // function sum1({ a, b, c }: Numbers) {
+// //   return a + b + c;
+// // }
+// // console.log(sum1(numbers));
+
+// type Reservation = {
+//   departureDate: Date;
+//   returnDate?: Date;
+//   departingFrom: string;
+//   destination: string;
 // };
 
-// let numbers: Numbers = { a: 2, b: 3, c: 9 };
-// // function sum(numbers: Numbers) {
-// //   return numbers.a + numbers.b + numbers.c;
-// // }
-// // console.log(sum(numbers));
+// // Function type: Reserve
 
-// function sum1({ a, b, c }: Numbers) {
-//   return a + b + c;
+// type Reserve = {
+//   //Overloading signature for Round Trip
+//   (
+//     departureDate: Date,
+//     returnDate: Date,
+//     departingFrom: string,
+//     destination: string
+//   ): Reservation;
+
+//   //one-way-trip
+
+//   (
+//     departureDate: Date,
+
+//     departingFrom: string,
+//     destination: string
+//   ): Reservation;
+// };
+
+// const reserve: Reserve = (
+//   departureDate: Date,
+//   returnDateOrDepartingFrom: Date | string,
+//   departingFromOrDestination: string,
+//   destination?: string
+// ) => {
+//   if (returnDateOrDepartingFrom instanceof Date && destination) {
+//     return {
+//       departureDate: departureDate,
+//       returnDate: returnDateOrDepartingFrom,
+//       departingFrom: departingFromOrDestination,
+//       destination: destination,
+//     };
+//   }
+
+//   // case 2: one-way
+//   else if (typeof returnDateOrDepartingFrom == "string") {
+//     return {
+//       departureDate: departureDate,
+//       departingFrom: returnDateOrDepartingFrom,
+//       destination: departingFromOrDestination,
+//     };
+//   }
+
+//   throw new Error("Please provide valid details to reserve a ticket");
+// };
+
+// console.log(reserve(new Date(), new Date(), " New Work", "washington"));
+
+// console.log(reserve(new Date(), " New Work", "washington"));
+
+// // What are Generics?
+
+// function returnParam(param) {
+//   return param;
 // }
-// console.log(sum1(numbers));
+// let x = returnParam("Hello");
+// console.log(x);
 
-type Reservation = {
-  departureDate: Date;
-  returnDate?: Date;
-  departingFrom: string;
-  destination: string;
-};
+// function returnParam<T>(param: T): T {
+//   return param;
+// }
 
-// Function type: Reserve
+// // <T> declares a generic type variable called T
+// // param: T -> the parameter if of type T
+// // : T -> the function will return the same type T
 
-type Reserve = {
-  //Overloading signature for Round Trip
-  (
-    departureDate: Date,
-    returnDate: Date,
-    departingFrom: string,
-    destination: string
-  ): Reservation;
+// const result1 = returnParam<string>("Hello");
+// console.log(result1);
+// const result2 = returnParam<number>(100);
+// console.log(result2);
 
-  //one-way-trip
+// const returnParamArrow = <T>(param: T): T => {
+//   return param;
+// }
 
-  (
-    departureDate: Date,
+// const returnParamExpr = function<U>(param: U): U {
+//   return param
+// }
 
-    departingFrom: string,
-    destination: string
-  ): Reservation;
-};
+// type MyObjectType = {
+//   myParam: <V>(param: V) => V
 
-const reserve: Reserve = (
-  departureDate: Date,
-  returnDateOrDepartingFrom: Date | string,
-  departingFromOrDestination: string,
-  destination?: string
-) => {
-  if (returnDateOrDepartingFrom instanceof Date && destination) {
-    return {
-      departureDate: departureDate,
-      returnDate: returnDateOrDepartingFrom,
-      departingFrom: departingFromOrDestination,
-      destination: destination,
-    };
-  }
+// }
 
-  // case 2: one-way
-  else if (typeof returnDateOrDepartingFrom == "string") {
-    return {
-      departureDate: departureDate,
-      departingFrom: returnDateOrDepartingFrom,
-      destination: departingFromOrDestination,
-    };
-  }
+// const obj: MyObjectType = {
+//   myParam: (param) => param
+// }
 
-  throw new Error("Please provide valid details to reserve a ticket");
-};
+// const obj2 : MyObjectType ={
+//   myParam:(param) => param
+// }
 
-console.log(reserve(new Date(), new Date(), " New Work", "washington"));
+// obj.myParam<string>("Hi there");
+// obj.myParam(123)
 
-console.log(reserve(new Date(), " New Work", "washington"));
+// function multiGeneric<V, X>(param1: V, param2: X): [V, X] {
+//   return [param1, param2]
+// }
+
+// const result = multiGeneric<string, number>("Hello", 33);
+// console.log(result)
