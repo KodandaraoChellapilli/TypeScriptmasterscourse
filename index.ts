@@ -125,3 +125,148 @@
 
 // const result = multiGeneric<string, number>("Hello", 33);
 // console.log(result)
+
+// function returnParam(param: any): any {
+//   return param;
+// }
+
+// let num = returnParam(5);
+// console.log(num);
+// num.toFixed();
+
+// function returnParam<Type>(param : Type): Type{
+//   return param;
+// }
+// let stringOutput = returnParam<string>("Hello");
+// let numberOutput = returnParam(100);
+
+// stringOutput.toUpperCase();
+// numberOutput.toFixed(2)
+// let str = returnParam("world");
+// let arr = returnParam([1,2,23])
+// let obj = returnParam({name: "Mark", age: 32})
+
+// const myParam: <T>(param: T) => T =(param) => param;
+
+// type Objecttype = {
+//   myParam: <V>(param: V) => V;
+// };
+
+// const obj1: Objecttype = {
+// //   myParam: (x) => x
+// // }
+
+// // let result = obj1.myParam(true)
+
+// //Generic Function Declarations
+
+// // Generic function Signature(after the = sign)
+
+// type GetFirstElement = <T>(arr: T[]) => T;
+// const getFirstElement: GetFirstElement = (arr) => {
+//   return arr[0];
+// };
+
+// const num = getFirstElement<Number>([1, 2, 22]);
+// console.log(num);
+// const str = getFirstElement(["a", "b", "c"]);
+// console.log(str);
+// let person = getFirstElement([{ name: "Vinny" }, { name: "Mark" }]);
+// console.log(person);
+
+type HasLength = { length: number };
+
+// function logLength<T extends HasLength>(item: T): void {
+//   console.log(item.length);
+// }
+
+// logLength("hello");
+// logLength([1, 2, 3, 4]);
+// logLength({ length: 10 });
+
+// function logLengthOrValue<T extends HasLength | number>(item: T): void {
+//   if (typeof item === "number") {
+//     console.log("Number do not have length, value", item);
+//   } else {
+//     console.log("Length is:", item.length);
+//   }
+// }
+
+// logLengthOrValue("Hithere");
+// logLengthOrValue([1, 2, 3, 4]);
+// logLengthOrValue({ length: 10 });
+// logLengthOrValue(23);
+
+type KeyValuePair<K, V> = {
+  key: K;
+  value: V;
+};
+
+let stringNumberPair: KeyValuePair<string, number> = {
+  key: "age",
+  value: 30,
+};
+
+let numberArrayPair: KeyValuePair<number, string[]> = {
+  key: 1234,
+  value: ["a", "b"],
+};
+
+type HasId = {
+  id: number;
+};
+
+function printId<T extends HasId>(obj: T) {
+  console.log(obj.id);
+}
+
+const user = {
+  id: 1234,
+  name: "Alice",
+};
+
+printId(user);
+
+const product = {
+  id: 23,
+  name: "Laptop",
+};
+
+printId(product);
+
+// Keyof -> gives a union of Keys of an object
+// index Signatures [key: string]
+// JavaScirpt Quirk : number keys are converted to strings automatically
+// Generics + keyof + mapped types ->
+
+type Events = {
+  id: number;
+  date: Date;
+  type: "indoor" | "outdor";
+};
+
+type UnionOfKeysOfEvents = keyof Events;
+
+// UnionOfKeysOFEvents = "id" | "date" | "type"
+
+let idEvent: UnionOfKeysOfEvents = "id";
+let dateEvent: UnionOfKeysOfEvents = "date";
+// let wrongKey: UnionOfKeysOfEvents = ""indoor" | "
+// outdoor""
+
+type Numeric = {
+  [key: number]: string;
+};
+
+type NumericKeyOf = keyof Number;
+
+let numobj: Numeric = {
+  1: "one",
+  2: "two",
+};
+
+// KeyOf Type Operator
+//Generic Default Values
+// Polymorphic Function
+//FucntionOverloads
+//Using Generics instead of FucntionOverloads
