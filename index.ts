@@ -31,242 +31,347 @@
 //     returnDate: Date,
 //     departingFrom: string,
 //     destination: string
-//   ): Reservation;
+// //   ): Reservation;
 
-//   //one-way-trip
+// //   //one-way-trip
 
-//   (
-//     departureDate: Date,
+// //   (
+// //     departureDate: Date,
 
-//     departingFrom: string,
-//     destination: string
-//   ): Reservation;
-// };
+// //     departingFrom: string,
+// //     destination: string
+// //   ): Reservation;
+// // };
 
-// const reserve: Reserve = (
-//   departureDate: Date,
-//   returnDateOrDepartingFrom: Date | string,
-//   departingFromOrDestination: string,
-//   destination?: string
-// ) => {
-//   if (returnDateOrDepartingFrom instanceof Date && destination) {
-//     return {
-//       departureDate: departureDate,
-//       returnDate: returnDateOrDepartingFrom,
-//       departingFrom: departingFromOrDestination,
-//       destination: destination,
-//     };
-//   }
+// // const reserve: Reserve = (
+// //   departureDate: Date,
+// //   returnDateOrDepartingFrom: Date | string,
+// //   departingFromOrDestination: string,
+// //   destination?: string
+// // ) => {
+// //   if (returnDateOrDepartingFrom instanceof Date && destination) {
+// //     return {
+// //       departureDate: departureDate,
+// //       returnDate: returnDateOrDepartingFrom,
+// //       departingFrom: departingFromOrDestination,
+// //       destination: destination,
+// //     };
+// //   }
 
-//   // case 2: one-way
-//   else if (typeof returnDateOrDepartingFrom == "string") {
-//     return {
-//       departureDate: departureDate,
-//       departingFrom: returnDateOrDepartingFrom,
-//       destination: departingFromOrDestination,
-//     };
-//   }
+// //   // case 2: one-way
+// //   else if (typeof returnDateOrDepartingFrom == "string") {
+// //     return {
+// //       departureDate: departureDate,
+// //       departingFrom: returnDateOrDepartingFrom,
+// //       destination: departingFromOrDestination,
+// //     };
+// //   }
 
-//   throw new Error("Please provide valid details to reserve a ticket");
-// };
+// //   throw new Error("Please provide valid details to reserve a ticket");
+// // };
 
-// console.log(reserve(new Date(), new Date(), " New Work", "washington"));
+// // console.log(reserve(new Date(), new Date(), " New Work", "washington"));
 
-// console.log(reserve(new Date(), " New Work", "washington"));
+// // console.log(reserve(new Date(), " New Work", "washington"));
 
-// // What are Generics?
+// // // What are Generics?
 
-// function returnParam(param) {
-//   return param;
-// }
-// let x = returnParam("Hello");
-// console.log(x);
+// // function returnParam(param) {
+// //   return param;
+// // }
+// // let x = returnParam("Hello");
+// // console.log(x);
 
-// function returnParam<T>(param: T): T {
-//   return param;
-// }
-
-// // <T> declares a generic type variable called T
-// // param: T -> the parameter if of type T
-// // : T -> the function will return the same type T
-
-// const result1 = returnParam<string>("Hello");
-// console.log(result1);
-// const result2 = returnParam<number>(100);
-// console.log(result2);
-
-// const returnParamArrow = <T>(param: T): T => {
-//   return param;
-// }
-
-// const returnParamExpr = function<U>(param: U): U {
-//   return param
-// }
-
-// type MyObjectType = {
-//   myParam: <V>(param: V) => V
-
-// }
-
-// const obj: MyObjectType = {
-//   myParam: (param) => param
-// }
-
-// const obj2 : MyObjectType ={
-//   myParam:(param) => param
-// }
-
-// obj.myParam<string>("Hi there");
-// obj.myParam(123)
-
-// function multiGeneric<V, X>(param1: V, param2: X): [V, X] {
-//   return [param1, param2]
-// }
-
-// const result = multiGeneric<string, number>("Hello", 33);
-// console.log(result)
-
-// function returnParam(param: any): any {
-//   return param;
-// }
-
-// let num = returnParam(5);
-// console.log(num);
-// num.toFixed();
-
-// function returnParam<Type>(param : Type): Type{
-//   return param;
-// }
-// let stringOutput = returnParam<string>("Hello");
-// let numberOutput = returnParam(100);
-
-// stringOutput.toUpperCase();
-// numberOutput.toFixed(2)
-// let str = returnParam("world");
-// let arr = returnParam([1,2,23])
-// let obj = returnParam({name: "Mark", age: 32})
-
-// const myParam: <T>(param: T) => T =(param) => param;
-
-// type Objecttype = {
-//   myParam: <V>(param: V) => V;
-// };
-
-// const obj1: Objecttype = {
-// //   myParam: (x) => x
+// // function returnParam<T>(param: T): T {
+// //   return param;
 // // }
 
-// // let result = obj1.myParam(true)
+// // // <T> declares a generic type variable called T
+// // // param: T -> the parameter if of type T
+// // // : T -> the function will return the same type T
 
-// //Generic Function Declarations
+// // const result1 = returnParam<string>("Hello");
+// // console.log(result1);
+// // const result2 = returnParam<number>(100);
+// // console.log(result2);
 
-// // Generic function Signature(after the = sign)
+// // const returnParamArrow = <T>(param: T): T => {
+// //   return param;
+// // }
 
-// type GetFirstElement = <T>(arr: T[]) => T;
-// const getFirstElement: GetFirstElement = (arr) => {
-//   return arr[0];
+// // const returnParamExpr = function<U>(param: U): U {
+// //   return param
+// // }
+
+// // type MyObjectType = {
+// //   myParam: <V>(param: V) => V
+
+// // }
+
+// // const obj: MyObjectType = {
+// //   myParam: (param) => param
+// // }
+
+// // const obj2 : MyObjectType ={
+// //   myParam:(param) => param
+// // }
+
+// // obj.myParam<string>("Hi there");
+// // obj.myParam(123)
+
+// // function multiGeneric<V, X>(param1: V, param2: X): [V, X] {
+// //   return [param1, param2]
+// // }
+
+// // const result = multiGeneric<string, number>("Hello", 33);
+// // console.log(result)
+
+// // function returnParam(param: any): any {
+// //   return param;
+// // }
+
+// // let num = returnParam(5);
+// // console.log(num);
+// // num.toFixed();
+
+// // function returnParam<Type>(param : Type): Type{
+// //   return param;
+// // }
+// // let stringOutput = returnParam<string>("Hello");
+// // let numberOutput = returnParam(100);
+
+// // stringOutput.toUpperCase();
+// // numberOutput.toFixed(2)
+// // let str = returnParam("world");
+// // let arr = returnParam([1,2,23])
+// // let obj = returnParam({name: "Mark", age: 32})
+
+// // const myParam: <T>(param: T) => T =(param) => param;
+
+// // type Objecttype = {
+// //   myParam: <V>(param: V) => V;
+// // };
+
+// // const obj1: Objecttype = {
+// // //   myParam: (x) => x
+// // // }
+
+// // // let result = obj1.myParam(true)
+
+// // //Generic Function Declarations
+
+// // // Generic function Signature(after the = sign)
+
+// // type GetFirstElement = <T>(arr: T[]) => T;
+// // const getFirstElement: GetFirstElement = (arr) => {
+// //   return arr[0];
+// // };
+
+// // const num = getFirstElement<Number>([1, 2, 22]);
+// // console.log(num);
+// // const str = getFirstElement(["a", "b", "c"]);
+// // console.log(str);
+// // let person = getFirstElement([{ name: "Vinny" }, { name: "Mark" }]);
+// // console.log(person);
+
+// type HasLength = { length: number };
+
+// // function logLength<T extends HasLength>(item: T): void {
+// //   console.log(item.length);
+// // }
+
+// // logLength("hello");
+// // logLength([1, 2, 3, 4]);
+// // logLength({ length: 10 });
+
+// // function logLengthOrValue<T extends HasLength | number>(item: T): void {
+// //   if (typeof item === "number") {
+// //     console.log("Number do not have length, value", item);
+// //   } else {
+// //     console.log("Length is:", item.length);
+// //   }
+// // }
+
+// // logLengthOrValue("Hithere");
+// // logLengthOrValue([1, 2, 3, 4]);
+// // logLengthOrValue({ length: 10 });
+// // logLengthOrValue(23);
+
+// type KeyValuePair<K, V> = {
+//   key: K;
+//   value: V;
 // };
 
-// const num = getFirstElement<Number>([1, 2, 22]);
-// console.log(num);
-// const str = getFirstElement(["a", "b", "c"]);
-// console.log(str);
-// let person = getFirstElement([{ name: "Vinny" }, { name: "Mark" }]);
-// console.log(person);
+// let stringNumberPair: KeyValuePair<string, number> = {
+//   key: "age",
+//   value: 30,
+// };
 
-type HasLength = { length: number };
+// let numberArrayPair: KeyValuePair<number, string[]> = {
+//   key: 1234,
+//   value: ["a", "b"],
+// };
 
-// function logLength<T extends HasLength>(item: T): void {
-//   console.log(item.length);
+// type HasId = {
+//   id: number;
+// };
+
+// function printId<T extends HasId>(obj: T) {
+//   console.log(obj.id);
 // }
 
-// logLength("hello");
-// logLength([1, 2, 3, 4]);
-// logLength({ length: 10 });
+// const user = {
+//   id: 1234,
+//   name: "Alice",
+// };
 
-// function logLengthOrValue<T extends HasLength | number>(item: T): void {
-//   if (typeof item === "number") {
-//     console.log("Number do not have length, value", item);
-//   } else {
-//     console.log("Length is:", item.length);
-//   }
-// }
+// printId(user);
 
-// logLengthOrValue("Hithere");
-// logLengthOrValue([1, 2, 3, 4]);
-// logLengthOrValue({ length: 10 });
-// logLengthOrValue(23);
+// const product = {
+//   id: 23,
+//   name: "Laptop",
+// };
 
-type KeyValuePair<K, V> = {
-  key: K;
-  value: V;
-};
+// printId(product);
 
-let stringNumberPair: KeyValuePair<string, number> = {
-  key: "age",
-  value: 30,
-};
+// // Keyof -> gives a union of Keys of an object
+// // index Signatures [key: string]
+// // JavaScirpt Quirk : number keys are converted to strings automatically
+// // Generics + keyof + mapped types ->
 
-let numberArrayPair: KeyValuePair<number, string[]> = {
-  key: 1234,
-  value: ["a", "b"],
-};
+// type Events = {
+//   id: number;
+//   date: Date;
+//   type: "indoor" | "outdor";
+// };
 
-type HasId = {
-  id: number;
-};
+// type UnionOfKeysOfEvents = keyof Events;
 
-function printId<T extends HasId>(obj: T) {
-  console.log(obj.id);
+// // UnionOfKeysOFEvents = "id" | "date" | "type"
+
+// let idEvent: UnionOfKeysOfEvents = "id";
+// let dateEvent: UnionOfKeysOfEvents = "date";
+// // let wrongKey: UnionOfKeysOfEvents = ""indoor" | "
+// // outdoor""
+
+// type Numeric = {
+//   [key: number]: string;
+// };
+
+// // type NumericKeyOf = keyof Number;
+
+// let numobj: Numeric = {
+//   1: "one",
+//   2: "two",
+// };
+
+// // KeyOf Type Operator
+// //Generic Default Values
+// // Polymorphic Function
+// //FucntionOverloads
+// //Using Generics instead of FucntionOverloads
+
+// type Events1 = {
+//   id: number;
+//   date: Date;
+//   type: "indoor" | "outdoor";
+// };
+
+// type UnionOfKeysOFEvents1 = keyof Events;
+
+// // type UnionOfKeysOFEvents1 = "id" | "date" | "type";
+
+// let idOfEvent: UnionOfKeysOFEvents1 = "id";
+
+// type Numeric1 = {
+//   [Key: number]: string;
+// };
+
+// const numobj1: Numeric1 = {
+//   1: "One",
+//   2: "Two",
+// };
+
+// type NumericKeyOf = keyof Numeric1;
+
+// //type Numerickeyof = number;
+
+// type NumberAndString = { [Key: string]: string };
+
+// let obj: NumberAndString = { 0: "first", second: "hello" };
+
+// console.log(obj[0]);
+
+// type Keys = keyof NumberAndString
+
+// // type Keys = string | number
+
+async function fetchData<T = any>(url: string): Promise<T> {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
 }
 
-const user = {
-  id: 1234,
-  name: "Alice",
-};
+async function fetchDefault() {
+  console.log("hi");
+  const data = await fetchData("https://jsonplaceholder.typicode.com/posts/1");
+  console.log(data);
+  console.log("Hi there");
+}
 
-printId(user);
+fetchDefault();
 
-const product = {
-  id: 23,
-  name: "Laptop",
-};
-
-printId(product);
-
-// Keyof -> gives a union of Keys of an object
-// index Signatures [key: string]
-// JavaScirpt Quirk : number keys are converted to strings automatically
-// Generics + keyof + mapped types ->
-
-type Events = {
+interface Post {
+  userId: number;
   id: number;
-  date: Date;
-  type: "indoor" | "outdor";
-};
+  title: string;
+  body: string;
+}
 
-type UnionOfKeysOfEvents = keyof Events;
+async function fetchPost() {
+  const post = await fetchData<Post>(
+    "https://jsonplaceholder.typicode.com/posts/1"
+  );
 
-// UnionOfKeysOFEvents = "id" | "date" | "type"
+  console.log(post);
+}
 
-let idEvent: UnionOfKeysOfEvents = "id";
-let dateEvent: UnionOfKeysOfEvents = "date";
-// let wrongKey: UnionOfKeysOfEvents = ""indoor" | "
-// outdoor""
+fetchPost();
 
-type Numeric = {
-  [key: number]: string;
-};
+// function addNumber(a: number, b: number): number {
+//   return a + b;
+// }
 
-type NumericKeyOf = keyof Number;
+// const result = addNumber(2, 3);
 
-let numobj: Numeric = {
-  1: "one",
-  2: "two",
-};
+// console.log(result);
 
-// KeyOf Type Operator
-//Generic Default Values
-// Polymorphic Function
-//FucntionOverloads
-//Using Generics instead of FucntionOverloads
+// async function waitAndSayHi() {
+//   console.log("Start");
+
+//   // await 2 seconds
+
+//   await new Promise((resolve) => setTimeout(resolve, 2000));
+
+//   console.log("Hi afer 2 seconds");
+// }
+
+// waitAndSayHi();
+
+// async function countNumbers() {
+//   console.log("start counting");
+
+//   const first = await new Promise<number>((resolve) =>
+//     setTimeout(() => resolve(1), 1000)
+//   );
+//   console.log("First Number", first);
+
+//   const second = await new Promise<number>((resolve) =>
+//     setTimeout(() => resolve(2), 1000)
+//   );
+//   console.log("First Number", second);
+
+//   console.log("Done!");
+// }
+
+// countNumbers();
