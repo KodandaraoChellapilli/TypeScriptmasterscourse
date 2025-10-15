@@ -15,6 +15,14 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Run tsc",
+      "runtimeExecutable": "tsc",
+      "cwd": "${workspaceFolder}",
+      "args": []
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/index.js",
